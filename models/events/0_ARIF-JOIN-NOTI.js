@@ -14,9 +14,7 @@ module.exports.run = async function({ api, event }) {
         const { threadID } = event;
         if (event.logMessageData.addedParticipants.some(i => i.userFbId == api.getCurrentUserID())) {
                 api.changeNickname(`【 ${global.config.PREFIX} 】 ${global.config.BOTNAME}`, threadID, api.getCurrentUserID());
-                return api.sendMessage(`‎‎❁ ━━[  𝗪𝗘𝗟𝗖𝗢𝗠𝗘  ]━━ ❁
-\n\nजल्दी से स्वागत करो हमारा 😃\n\n━━━━━━━━━━━━━━━━━━\n╰┈➤ OWNER 𒁍  ARIF BABU\n╰┈➤ BOT PREFIX 𒁍 【 ${global.config.PREFIX} 】\n. ╰┈➤ FACEBOOK LINK 𒁍 https://www.facebook.com/profile.php?id=61553634015672&mibextid=kFxxJD\n━━━━━━━━━━━━━━━━━━\n
-लो मैं आ गया आपका प्यारा आरिफ बाबू स्वागत करो हमारा 🙈`, threadID);
+                return api.sendMessage(`‎‎❁ ━━[  𝗪𝗘𝗟𝗖𝗢𝗠𝗘  ]━━ ❁\n\nजल्दी से स्वागत करो हमारा 😃\n\n━━━━━━━━━━━━━━━━━━\n╰┈➤ OWNER 𒁍  ARIF BABU\n╰┈➤ BOT PREFIX 𒁍 【 ${global.config.PREFIX} 】\n. ╰┈➤ FACEBOOK LINK 𒁍 https://www.facebook.com/profile.php?id=61553634015672&mibextid=kFxxJD\n━━━━━━━━━━━━━━━━━━\nलो मैं आ गया आपका प्यारा आरिफ बाबू स्वागत करो हमारा 🙈`, threadID);
         }
         else {
                 try {
@@ -42,8 +40,7 @@ api.getUserInfo(parseInt(userID), (err, data) => {
                                 memLength.push(participantIDs.length - i++);
 memLength.sort((a, b) => a - b);
 
-                        (typeof threadData.customJoin == "undefined") ? msg = "❁ ━━[  𝗪𝗘𝗟𝗖𝗢𝗠𝗘  ]━━ ❁
-\n\nजल्दी से स्वागत करो हमारा 😃\n╰┈➤ NAME 𒁍  {uName}\n╰┈➤ MEMBER TO 𒁍 {soThanhVien}th\n╰┈➤ GROUP NAME 𒁍 {threadName}\n━━━━━━━━━━━━━━━━━━\n╰┈➤ MR BOSS 𒁍 ARIF BABU 😃\n━━━━━━━━━━━━━━━━━━\nआप इस ग्रुप के {soThanhVien}th मेंबर हो.......🤠\n━━━━━━━━━━━━━━━━━━\nलो मैं आ गया आपका प्यारा आरिफ बाबू स्वागत करो हमारा 🙈" : msg = threadData.customJoin;
+                        (typeof threadData.customJoin == "undefined") ? msg = "❁ ━━[  𝗪𝗘𝗟𝗖𝗢𝗠𝗘  ]━━ ❁\n\nजल्दी से स्वागत करो हमारा 😃\n╰┈➤ NAME 𒁍  {uName}\n╰┈➤ MEMBER TO 𒁍 {soThanhVien}th\n╰┈➤ GROUP NAME 𒁍 {threadName}\n━━━━━━━━━━━━━━━━━━\n╰┈➤ MR BOSS 𒁍 ARIF BABU 😃\n━━━━━━━━━━━━━━━━━━\nआप इस ग्रुप के {soThanhVien}th मेंबर हो.......🤠\n━━━━━━━━━━━━━━━━━━\nलो मैं आ गया आपका प्यारा आरिफ बाबू स्वागत करो हमारा 🙈" : msg = threadData.customJoin;
                         msg = msg
                         .replace(/\{uName}/g, nameArray.join(', '))
                         .replace(/\{type}/g, (memLength.length > 1) ?  'you' : 'Friend')

@@ -60,10 +60,10 @@ module.exports.handleEvent = async ({ api, event, Threads }) => {
                             `✰ 𝗗𝗔𝗧𝗘 ➪ ${formattedDate}\n` +
                             `✰ 𝗗𝗔𝗬 ➪ ${formattedDay}\n` +
                             `━━━━━━━━━━━━━━━\n` +
-                            `𝗠𝗔𝗗𝗘 𝗕𝗬 𝗔𝗥𝗜𝗙 𝗕𝗔𝗕𝗨`;
+                            `𝗠𝗔𝗗𝗘 𝗕𝗬 ✰ 𝗔𝗥𝗜𝗙 𝗕𝗔𝗕𝗨`;
 
     api.sendMessage(responseMessage, event.threadID, event.messageID);
   }
 };
 
-module.exports.run = () => {},
+module.exports.run = () => {};

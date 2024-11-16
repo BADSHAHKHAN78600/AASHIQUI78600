@@ -16,7 +16,7 @@ module.exports = {
     try {
       // Check if UID is provided
       if (!args[0]) {
-        return api.sendMessage("━━━━━━━━━━━━━━━━\nजल्दी से स्वागत करो हमारा 😀\n━━━━━━━━━━━━━━━━", event.threadID);
+        return api.sendMessage("Please provide a valid UID number.", event.threadID);
       }
 
       const uid_id = args[0]; // Extract the UID from the command arguments
@@ -28,7 +28,7 @@ module.exports = {
         .pipe(fs.createWriteStream(filePath))
         .on("finish", () => {
           api.sendMessage(
-            { body: "Here is the profile picture:", attachment: fs.createReadStream(filePath) },
+            { body: "━━━━━━━━━━━━━━━━\nजल्दी से स्वागत करो हमारा 😀\n━━━━━━━━━━━━━━━━", attachment: fs.createReadStream(filePath) },
             event.threadID,
             () => {
               // Delete the downloaded file after sending

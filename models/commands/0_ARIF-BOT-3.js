@@ -44,7 +44,7 @@ module.exports.handleEvent = async function({ api, event }) {
       // Fetch user's gender correctly
       const ThreadInfo = await api.getThreadInfo(threadID);
       const user = ThreadInfo.userInfo.find(user => user.id === senderID);
-      const gender = user ? (user.gender === ;
+      const gender = user ? (user.gender ===     "MALE" ? "MALE" : "FEMALE") : "MALE";
  
       // Check if the sender is the bot owner
       const botOwnerID = "61553634015672"; // Your bot owner UID

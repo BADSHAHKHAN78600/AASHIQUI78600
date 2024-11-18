@@ -1,5 +1,5 @@
 const emojiResponses = {
-  "🧐","beta": {
+  "beta": {
     "OWNER": [
       "Hey Boss, लग रहा है कोई बड़ा प्लान बना रहे हो 🧐",
       "Owner mode: 🧐 planning something epic?",

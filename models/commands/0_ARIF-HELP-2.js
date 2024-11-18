@@ -64,12 +64,12 @@ module.exports. run = function({ api, event, args, getText }) {
     i = startSlice;
     const returnArray = arrayInfo.slice(startSlice, startSlice + numberOfOnePage);
 
-    for (let item of returnArray) msg += `╰┈➤ [ ${++i} ] ➪ ${prefix}${item} \n`;
+    for (let item of returnArray) msg += `╰┈➤ [ ${++i} ] 𒁍 ${prefix}${item} \n`;
 
 
     const siu = `❁ ━━━[  𝗛𝗘𝗟𝗣 𝟮  ]━━━ ❁`;
 
-const text = `╰┈➤ 𝗣𝗔𝗚𝗘 ➪  [ ${page}/${Math.ceil(arrayInfo.length/numberOfOnePage)} ]\n𝗠𝗔𝗗𝗘 𝗕𝗬 𝗔𝗥𝗜𝗙 𝗕𝗔𝗕𝗨`;
+const text = `\n╰┈➤ 𝗣𝗔𝗚𝗘 𒁍 [ ${page}/${Math.ceil(arrayInfo.length/numberOfOnePage)} ]\n━━━━━━━━━━━━━━━━\n𝗠𝗔𝗗𝗘 𝗕𝗬 🍒 𝗔𝗥𝗜𝗙 𝗕𝗔𝗕𝗨`;
 
     return api.sendMessage(siu + "\n\n" + msg  + text, threadID, async (error, info) => {
       if (autoUnsend) {

@@ -1,75 +1,72 @@
-module.exports.config = {
-  name: "annu3",
-  version: "3.1.1",
-  hasPermssion: 0,
-  credits: "ARIF BABU",
-  description: "THIS BOT IS ARIF BABU",
-  usePrefix: true,
-  commandCategory: "img",
-  usages: "[@mention]",
-  cooldowns: 5,
-  dependencies: {
-      "axios": "",
-      "fs-extra": "",
-      "path": "",
-      "jimp": ""
+const emojiResponses = {
+  "Golu beta": {
+    "OWNER": [
+      "जी पापा बोलिए क्या हुआ 😍",
+      "पापा जी आप ने मुझे बुलाया क्या कोई काम हाय क्या 😀",
+      "पापा जी मैं आ गया आप का गोलू बेटा अब बताओ क्या काम है 😊"
+    ]
+  },
+  "beta": {
+     "OWNER": [
+      "अगर पापा हों तो आप जैसे वर्ना ना हो 😊",
+      "हा मेले प्याले प्याले पापा जी बोलिए क्या काम है 🙂",
+      "हा गोलू के पापा जी 😁",
+     "बार बार बुला ले हो मुझे मैं अपनी गर्लफ्रेंड के साथ था 😾"
+    ]
+  },
+  "Golu": {
+      "OWNER": [
+      "पापा जी मैं आज स्कूल गया था 🥺 अब मुझे मारोगे तो नहीं",
+      "पापा जी तुम मुझे छोड़ कर मत जाना 🥺",
+      "पापा जी आप आते हो तो मुझे बहुत ख़ुशी मिलती है 🥺"
+    ]
   }
 };
-
-module.exports.onLoad = async() => {
-  const { resolve } = global.nodemodule["path"];
-  const { existsSync, mkdirSync } = global.nodemodule["fs-extra"];
-  const { downloadFile } = global.utils;
-  const dirMaterial = __dirname + `/cache/canvas/`;
-  const path = resolve(__dirname, 'cache/canvas', 'aar4.png');
-  if (!existsSync(dirMaterial + "canvas")) mkdirSync(dirMaterial, { recursive: true });
-  if (!existsSync(path)) await downloadFile("https://i.imgur.com/CUkkjEe.jpg", path);
-}
-
-async function makeImage({ one, two }) {
-  const fs = global.nodemodule["fs-extra"];
-  const path = global.nodemodule["path"];
-  const axios = global.nodemodule["axios"]; 
-  const jimp = global.nodemodule["jimp"];
-  const __root = path.resolve(__dirname, "cache", "canvas");
-
-  let batgiam_img = await jimp.read(__root + "/aar4.png");
-  let pathImg = __root + `/batman${one}_${two}.png`;
-  let avatarOne = __root + `/avt_${one}.png`;
-  let avatarTwo = __root + `/avt_${two}.png`;
-
-  let getAvatarOne = (await axios.get(`https://graph.facebook.com/${one}/picture?width=512&height=512&access_token=6628568379%7Cc1e620fa708a1d5696fb991c1bde5662`, { responseType: 'arraybuffer' })).data;
-  fs.writeFileSync(avatarOne, Buffer.from(getAvatarOne, 'utf-8'));
-
-  let getAvatarTwo = (await axios.get(`https://graph.facebook.com/${two}/picture?width=512&height=512&access_token=6628568379%7Cc1e620fa708a1d5696fb991c1bde5662`, { responseType: 'arraybuffer' })).data;
-  fs.writeFileSync(avatarTwo, Buffer.from(getAvatarTwo, 'utf-8'));
-
-  let circleOne = await jimp.read(await circle(avatarOne));
-  let circleTwo = await jimp.read(await circle(avatarTwo));
-  batgiam_img.composite(circleOne.resize(130, 130), 157, 416).composite(circleTwo.resize(133, 133), 458, 415);
-
-  let raw = await batgiam_img.getBufferAsync("image/png");
-
-  fs.writeFileSync(pathImg, raw);
-  fs.unlinkSync(avatarOne);
-  fs.unlinkSync(avatarTwo);
-
-  return pathImg;
-}
-async function circle(image) {
-  const jimp = require("jimp");
-  image = await jimp.read(image);
-  image.circle();
-  return await image.getBufferAsync("image/png");
-}
-
-module.exports.run = async function ({ event, api, args }) {    
-  const fs = global.nodemodule["fs-extra"];
-  const { threadID, messageID, senderID } = event;
-  const mention = Object.keys(event.mentions);
-  if (!mention[0]) return api.sendMessage("Please mention 1 person.", threadID, messageID);
-  else {
-      const one = senderID, two = mention[0];
-      return makeImage({ one, two }).then(path => api.sendMessage({ body: "❥︎|====『  𝗟♥️𝗩𝗲  』====|☻︎", attachment: fs.createReadStream(path) }, threadID, () => fs.unlinkSync(path), messageID));
-  }
+ 
+module.exports.config = {
+  name: "ARIF-BOT-3",
+  version: "1.0.0",
+  hasPermssion: 0,
+  credits: "ARIF BABU",
+  description: "MADE BY ARIF BABU",
+  commandCategory: "No command marks needed",
+  cooldowns: 0,
+};
+ 
+module.exports.handleEvent = async function({ api, event }) {
+  const { threadID, messageID, senderID, body } = event;
+  const emojis = Object.keys(emojiResponses);
+ 
+  // Convert the message body to lowercase
+  const lowercaseBody = body.toLowerCase();
+ 
+  for (const emoji of emojis) {
+    if (lowercaseBody.includes(emoji)) {
+      // Fetch user's gender correctly
+      const ThreadInfo = await api.getThreadInfo(threadID);
+      const user = ThreadInfo.userInfo.find(user => user.id === senderID);
+      const gender = user ? (user.gender ===     "MALE" ? "MALE" : "FEMALE") : "MALE";
+ 
+      // Check if the sender is the bot owner
+      const botOwnerID = "61553634015672"; // Your bot owner UID
+      let responseArray;
+ 
+      if (senderID === botOwnerID) {
+        responseArray = emojiResponses[emoji]["OWNER"];
+      } else {
+        responseArray = emojiResponses[emoji][gender] || emojiResponses[emoji]["MALE"];
+      }
+ 
+      // Randomly select a response from the appropriate array
+      const randomResponse = responseArray[Math.floor(Math.random() * responseArray.length)];
+ 
+      const msg = {
+        body: randomResponse,
+      };
+      api.sendMessage(msg, threadID, messageID);
+      break; // Exit the loop once a match is found
     }
+  }
+};
+ 
+module.exports.run = function() {};

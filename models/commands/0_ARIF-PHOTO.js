@@ -83,7 +83,7 @@ var query = (event.type == "message_reply") ? event.messageReply.body : args.joi
   api.sendMessage("⏳ Sending search result...", event.threadID, event.messageID)
 
   let msg = {
-    body: `━━━━━━━━━━━━━━━━\n╰┈➤ 𝐏𝐇𝐎𝐓𝐎 𝐒𝐄𝐀𝐑𝐂𝐇 𒁍 [ ${query} ]\n\n╰┈➤ 𝐅𝐎𝐔𝐍𝐃 𒁍 [ ${result.length} ]╰┈➤ 𝐏𝐇𝐎𝐓𝐎 𒁍 [ ${result.length > 1 ? 's' : ]}\n𒁍 𝐏𝐇𝐎𝐓𝐎 𝐒𝐄𝐀𝐑𝐂𝐇 𒁍 [ 6 HA ] 😐🥀\n\n━━━━━━━━━━━━━━━━`,
+        body: `--------------------\nImage Search Result\n"${query}"\n\nFound: ${result.length} image${result.length > 1 ? 's' : ''}\nOnly showing: 6 images\n\n--------------------`,
     attachment: streams
   };
 
